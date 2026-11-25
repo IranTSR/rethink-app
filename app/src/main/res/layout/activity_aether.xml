@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Aether tunnel settings. One scrolling screen, sections in the same order
+  as the engine's own docs: status, transport, scan, noise, MASQUE/QUIC,
+  Tor, Psiphon, Zero Trust, routing/DNS, kill-switch, advanced.
+  All strings live in res/values/aether_strings.xml.
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_title"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_subtitle" />
+
+        <TextView
+            android:id="@+id/aether_engine_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/aether_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/aether_status_idle"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/aether_endpoint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/aether_unsupported"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/aether_unsupported"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btn_toggle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/aether_enable" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/aether_start_vpn_hint" />
+
+        <!-- Transport -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/aether_section_transport"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_transport_hint" />
+
+        <Spinner
+            android:id="@+id/sp_transport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
+
+        <EditText
+            android:id="@+id/et_peer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_peer"
+            android:inputType="textUri" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_peer_hint" />
+
+        <EditText
+            android:id="@+id/et_outer_peer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_outer_peer"
+            android:inputType="textUri" />
+
+        <EditText
+            android:id="@+id/et_inner_peer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_inner_peer"
+            android:inputType="textUri" />
+
+        <EditText
+            android:id="@+id/et_gool_peer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_gool_peer"
+            android:inputType="textUri" />
+
+        <!-- Endpoint scan -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/aether_section_scan"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_scan_mode" />
+
+        <Spinner
+            android:id="@+id/sp_scan_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_scan_ip" />
+
+        <Spinner
+            android:id="@+id/sp_scan_ip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/et_scan_ports"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_scan_ports"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/et_excluded"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_scan_excluded"
+            android:inputType="text" />
+
+        <CheckBox
+            android:id="@+id/cb_quick_reconnect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_quick_reconnect" />
+
+        <Button
+            android:id="@+id/btn_scan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_btn_scan" />
+
+        <Button
+            android:id="@+id/btn_verify"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_btn_verify" />
+
+        <Button
+            android:id="@+id/btn_clean_ip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_btn_clean_ip" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_clean_ip_hint" />
+
+        <TextView
+            android:id="@+id/tv_scan_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp" />
+
+        <!-- Noise & DPI evasion -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/aether_section_noise"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_noize" />
+
+        <Spinner
+            android:id="@+id/sp_noize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:id="@+id/cb_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_fragment" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_fragment_hint" />
+
+        <EditText
+            android:id="@+id/et_fragment_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_fragment_size"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/et_fragment_delay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_fragment_delay"
+            android:inputType="number" />
+
+        <CheckBox
+            android:id="@+id/cb_ech"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_ech" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_ech_hint" />
+
+        <EditText
+            android:id="@+id/et_ech_domain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_ech_domain"
+            android:inputType="textUri" />
+
+        <!-- MASQUE / QUIC -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/aether_section_masque"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/cb_http2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_http2" />
+
+        <CheckBox
+            android:id="@+id/cb_quic_v2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_quic_v2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_quic_v2_hint" />
+
+        <EditText
+            android:id="@+id/et_masque_sni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_masque_sni"
+            android:inputType="textUri" />
+
+        <EditText
+            android:id="@+id/et_masque_h2_peer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_masque_h2_peer"
+            android:inputType="textUri" />
+
+        <EditText
+            android:id="@+id/et_keepalive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_keepalive"
+            android:inputType="number" />
+
+        <!-- Tor -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/aether_section_tor"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_tor_unavailable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_tor_unavailable"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_tor_hint" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_tor_mode" />
+
+        <Spinner
+            android:id="@+id/sp_tor_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_tor_bridges" />
+
+        <Spinner
+            android:id="@+id/sp_tor_bridges"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/et_tor_custom_bridges"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_tor_custom_bridges"
+            android:inputType="textMultiLine"
+            android:minLines="2" />
+
+        <EditText
+            android:id="@+id/et_tor_country"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_tor_country"
+            android:inputType="textCapCharacters" />
+
+        <!-- Psiphon -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/aether_section_psiphon"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_psiphon_unavailable" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_psiphon_mode" />
+
+        <Spinner
+            android:id="@+id/sp_psiphon_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/et_psiphon_region"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_psiphon_region"
+            android:inputType="textCapCharacters" />
+
+        <EditText
+            android:id="@+id/et_psiphon_cdn_sni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_psiphon_cdn_sni"
+            android:inputType="textUri" />
+
+        <EditText
+            android:id="@+id/et_psiphon_bin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_psiphon_bin"
+            android:inputType="textUri" />
+
+        <EditText
+            android:id="@+id/et_psiphon_config"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_psiphon_config"
+            android:inputType="textUri" />
+
+        <EditText
+            android:id="@+id/et_psiphon_entries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_psiphon_entries"
+            android:inputType="textUri" />
+
+        <!-- Zero Trust -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/aether_section_zerotrust"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_zt_hint" />
+
+        <EditText
+            android:id="@+id/et_zt_team"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_zt_team"
+            android:inputType="textUri" />
+
+        <EditText
+            android:id="@+id/et_zt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_zt_email"
+            android:inputType="textEmailAddress" />
+
+        <Button
+            android:id="@+id/btn_zt_request_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_zt_request_code" />
+
+        <EditText
+            android:id="@+id/et_zt_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_zt_code"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/btn_zt_submit_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_zt_submit_code" />
+
+        <Button
+            android:id="@+id/btn_zt_resend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_zt_resend" />
+
+        <Button
+            android:id="@+id/btn_zt_sign_out"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_zt_sign_out" />
+
+        <CheckBox
+            android:id="@+id/cb_zt_gateway"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_zt_gateway" />
+
+        <TextView
+            android:id="@+id/tv_zt_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Routing & DNS -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/aether_section_routing"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/et_route_block"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_route_block"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/et_route_direct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_route_direct"
+            android:inputType="text" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_route_hint" />
+
+        <EditText
+            android:id="@+id/et_in_tunnel_dns"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_in_tunnel_dns"
+            android:inputType="text" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_in_tunnel_dns_hint" />
+
+        <EditText
+            android:id="@+id/et_upstream"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_upstream"
+            android:inputType="textUri" />
+
+        <EditText
+            android:id="@+id/et_exit_loc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_exit_loc"
+            android:inputType="textCapCharacters" />
+
+        <EditText
+            android:id="@+id/et_http_proxy_port"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_http_proxy_port"
+            android:inputType="number" />
+
+        <!-- Kill-switch -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/aether_section_killswitch"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/cb_killswitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_killswitch" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_killswitch_hint" />
+
+        <!-- Advanced -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/aether_section_advanced"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/et_extra_cli"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_extra_cli"
+            android:inputType="textMultiLine"
+            android:minLines="2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aether_extra_cli_hint" />
+
+        <EditText
+            android:id="@+id/et_extra_env"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aether_extra_env"
+            android:inputType="textMultiLine"
+            android:minLines="2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/aether_advanced_hint" />
+
+        <Button
+            android:id="@+id/btn_open_proxy_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/aether_open_proxy_settings" />
+
+    </LinearLayout>
+</ScrollView>

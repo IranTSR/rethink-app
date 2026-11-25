@@ -40,6 +40,35 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      # -- Aether engine (vendored Rust core, native/aether) ------------------
+      # Same block as .github/workflows/android.yml — keep the two in sync.
+      # Upstream publishes no Android binaries, so the engine is built from
+      # source here with cargo-ndk into app/src/main/jniLibs/ before Gradle.
+      - name: 🤖 Set up Android SDK + NDK (Aether engine)
+        uses: android-actions/setup-android@v3
+      - name: 🤖 Install NDK 26.3.11579264 (Aether engine)
+        run: |
+          yes | sdkmanager "ndk;26.3.11579264" > /dev/null
+          echo "ANDROID_NDK_HOME=${ANDROID_SDK_ROOT}/ndk/26.3.11579264" >> "$GITHUB_ENV"
+      - name: 🦀 Set up Rust (Aether engine Android targets)
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-linux-android,armv7-linux-androideabi
+      - name: 🦀 Install cargo-ndk (Aether engine)
+        run: cargo install cargo-ndk --locked
+      - name: 🦀 Native build deps (CMake for quiche/boringssl)
+        run: |
+          cmake --version
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq cmake ninja-build pkg-config
+      - name: 🔍 Verify vendored Aether core (never upgrades in CI)
+        run: bash scripts/sync-core.sh --check
+      - name: 🦀 Build Aether engine (libaether.so + JNI bridge)
+        run: bash scripts/build-aether.sh
+        env:
+          ANDROID_API: "26"
+          AETHER_FEATURES: "tor"
+
       - name: 🎪 Secrets
         if: success()
         # TODO: change build variant to fdroid if json does not exist

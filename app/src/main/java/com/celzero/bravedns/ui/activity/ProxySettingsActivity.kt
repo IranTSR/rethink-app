@@ -249,6 +249,11 @@ class ProxySettingsActivity : BaseActivity(R.layout.fragment_proxy_configure) {
 
         b.settingsActivityWireguardImg.setOnClickListener { openWireguardActivity() }
 
+        // Aether tunnel engine (vendored Rust core, native/aether).
+        b.settingsActivityAetherContainer.setOnClickListener { openAetherActivity() }
+
+        b.settingsActivityAetherImg.setOnClickListener { openAetherActivity() }
+
         b.settingsActivityHttpProxyContainer.setOnClickListener {
             b.settingsActivityHttpProxySwitch.isChecked =
                 !b.settingsActivityHttpProxySwitch.isChecked
@@ -433,6 +438,11 @@ class ProxySettingsActivity : BaseActivity(R.layout.fragment_proxy_configure) {
 
     private fun openWireguardActivity() {
         val intent = Intent(this, WgMainActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun openAetherActivity() {
+        val intent = Intent(this, AetherActivity::class.java)
         startActivity(intent)
     }
 

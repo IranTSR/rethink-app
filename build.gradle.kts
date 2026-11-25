@@ -40,8 +40,8 @@ allprojects {
         val firestackRepo = project.findProperty("firestackRepo")?.toString() ?: "github"
 
         when (firestackRepo) {
-            "jitpack" -> {
-                // jitpack.io/#celzero/firestack
+            "jitpack", "jitpack-fork" -> {
+                // jitpack.io/#celzero/firestack (jitpack) or #IranTSR/firestack (jitpack-fork)
                 maven { url = uri("https://jitpack.io") }
             }
             "github" -> {

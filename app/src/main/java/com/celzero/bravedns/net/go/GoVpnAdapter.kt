@@ -1171,6 +1171,57 @@ class GoVpnAdapter : KoinComponent {
         setHttpProxyIfNeeded(appConfig.getTunProxyMode())
     }
 
+    /**
+     * Registers the Aether engine under its distinct firestack proxy id
+     * ("AETHER") so per-app proxy rules and future tunnel modes can address
+     * it directly. Uses the firestack "aether" scheme (intra/ipn/aether.go);
+     * on a firestack build that predates that type, addProxy returns null
+     * and we fall back to the plain socks5 scheme under the same id.
+     * The primary traffic path does NOT depend on this — the TUN egress
+     * uses the SOCKS5 slot (id "S5", see setSocks5TunnelModeIfNeeded).
+     * Returns true when a proxy was registered under the AETHER id.
+     */
+    suspend fun addAetherProxy(): Boolean {
+        if (!tunnel.isConnected) {
+            Logger.e(LOG_TAG_VPN, "$TAG no tunnel, skip add aether proxy")
+            return false
+        }
+        return try {
+            val id = ProxyManager.ID_AETHER_BASE
+            val url = "aether://127.0.0.1:1819"
+            var res = getProxies()?.addProxy(id, url)
+            if (res == null) {
+                Logger.w(
+                    LOG_TAG_VPN,
+                    "$TAG aether scheme unknown to firestack, falling back to socks5://"
+                )
+                res = getProxies()?.addProxy(id, "socks5://127.0.0.1:1819")
+            }
+            if (res != null) GlobalProxyHandler.track(id)
+            Logger.i(
+                LOG_TAG_VPN,
+                "$TAG aether proxy set with url($id): $url, success? ${res != null}"
+            )
+            res != null
+        } catch (e: Exception) {
+            Logger.e(LOG_TAG_VPN, "$TAG err adding aether proxy", e)
+            false
+        }
+    }
+
+    suspend fun removeAetherProxy() {
+        if (!tunnel.isConnected) return
+        try {
+            val id = ProxyManager.ID_AETHER_BASE
+            getProxies()?.removeProxy(id)
+            // the proxy is no longer in the tunnel, do not re-add it
+            GlobalProxyHandler.untrack(id)
+            Logger.i(LOG_TAG_VPN, "$TAG removed aether proxy")
+        } catch (e: Exception) {
+            Logger.e(LOG_TAG_VPN, "$TAG err removing aether proxy: ${e.message}", e)
+        }
+    }
+
     private suspend fun setSocks5TunnelModeIfNeeded(tunProxyMode: AppConfig.TunProxyMode) {
         val socksEnabled = AppConfig.ProxyType.of(appConfig.getProxyType()).isSocks5Enabled()
         if (!socksEnabled) return

@@ -35,8 +35,8 @@ dependencyResolutionManagement {
         // project build.gradle files are ignored
         val firestackRepo = providers.gradleProperty("firestackRepo").orElse("github").get()
 
-        if (firestackRepo == "jitpack") {
-            // jitpack.io/#celzero/firestack
+        if (firestackRepo == "jitpack" || firestackRepo == "jitpack-fork") {
+            // jitpack.io/#celzero/firestack (jitpack) or #IranTSR/firestack (jitpack-fork)
             maven { url = uri("https://jitpack.io") }
         } else if (firestackRepo == "github") {
             // maven.pkg.github.com/celzero/firestack

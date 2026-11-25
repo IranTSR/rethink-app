@@ -4245,6 +4245,16 @@ class BraveVPNService : VpnService(), ConnectionMonitor.NetworkListener, Network
         vpnAdapter?.readdHttpProxy()
     }
 
+    suspend fun addAetherProxy(): Boolean {
+        logd("add aether proxy")
+        return vpnAdapter?.addAetherProxy() ?: false
+    }
+
+    suspend fun removeAetherProxy() {
+        logd("remove aether proxy")
+        vpnAdapter?.removeAetherProxy()
+    }
+
     suspend fun pauseMobileOnlyWireGuardOnNoNw() {
         if (persistentState.wgTaskerAutomationEnabled) {
             // wg automation is owned by an external app (tasker et al), see VpnControlReceiver

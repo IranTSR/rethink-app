@@ -407,6 +407,14 @@ object VpnController : KoinComponent {
         rvpn?.readdSocks5Proxy()
     }
 
+    suspend fun addAetherProxy(): Boolean {
+        return rvpn?.addAetherProxy() ?: false
+    }
+
+    suspend fun removeAetherProxy() {
+        rvpn?.removeAetherProxy()
+    }
+
     suspend fun readdHttpProxy() {
         rvpn?.readdHttpProxy()
     }

@@ -1984,6 +1984,30 @@
     <string name="about_terms_of_service" translatable="true">Terms of Service</string>
 
     <string name="lbl_amnezia" translatable="false">Amnezia</string>
+    <string name="lbl_amnezia_menu_desc" translatable="true">More options</string>
+    <string name="show_amnezia_properties" translatable="true">Show Amnezia properties</string>
+    <string name="hide_amnezia_properties" translatable="true">Hide Amnezia properties</string>
+    <string name="enable_amnezia_compatibility" translatable="true">Enable Amnezia compatibility</string>
+    <string name="remove_amnezia_compatibility" translatable="true">Remove Amnezia compatibility</string>
+    <string name="mimic_quic" translatable="true">Mimic QUIC</string>
+    <string name="mimic_dns" translatable="true">Mimic DNS</string>
+    <string name="mimic_sip" translatable="true">Mimic SIP</string>
+    <string name="lbl_amz_jc" translatable="true">Jc (junk packet count)</string>
+    <string name="lbl_amz_jmin" translatable="true">Jmin (junk packet min size)</string>
+    <string name="lbl_amz_jmax" translatable="true">Jmax (junk packet max size)</string>
+    <string name="lbl_amz_s1" translatable="true">S1 (init packet junk size)</string>
+    <string name="lbl_amz_s2" translatable="true">S2 (response packet junk size)</string>
+    <string name="lbl_amz_s3" translatable="true">S3 (cookie packet junk size)</string>
+    <string name="lbl_amz_s4" translatable="true">S4 (transport packet junk size)</string>
+    <string name="lbl_amz_h1" translatable="true">H1 (init packet magic header)</string>
+    <string name="lbl_amz_h2" translatable="true">H2 (response packet magic header)</string>
+    <string name="lbl_amz_h3" translatable="true">H3 (underload packet magic header)</string>
+    <string name="lbl_amz_h4" translatable="true">H4 (transport packet magic header)</string>
+    <string name="lbl_amz_i1" translatable="true">I1 (special junk packet)</string>
+    <string name="lbl_amz_i2" translatable="true">I2 (special junk packet)</string>
+    <string name="lbl_amz_i3" translatable="true">I3 (special junk packet)</string>
+    <string name="lbl_amz_i4" translatable="true">I4 (special junk packet)</string>
+    <string name="lbl_amz_i5" translatable="true">I5 (special junk packet)</string>
 
     <string name="lbl_hopping" translatable="false">MPR</string>
 

@@ -84,10 +84,17 @@ class WgInterface private constructor(builder: Builder) {
     private val jmax: Optional<Int>
     private val s1: Optional<Int>
     private val s2: Optional<Int>
+    private val s3: Optional<Int>
+    private val s4: Optional<Int>
     private val h1: Optional<Long>
     private val h2: Optional<Long>
     private val h3: Optional<Long>
     private val h4: Optional<Long>
+    private val i1: Optional<String>
+    private val i2: Optional<String>
+    private val i3: Optional<String>
+    private val i4: Optional<String>
+    private val i5: Optional<String>
 
     /**
      * Returns the MTU used for the WireGuard interface.
@@ -106,10 +113,17 @@ class WgInterface private constructor(builder: Builder) {
         jmax = builder.jmax
         s1 = builder.s1
         s2 = builder.s2
+        s3 = builder.s3
+        s4 = builder.s4
         h1 = builder.h1
         h2 = builder.h2
         h3 = builder.h3
         h4 = builder.h4
+        i1 = builder.i1
+        i2 = builder.i2
+        i3 = builder.i3
+        i4 = builder.i4
+        i5 = builder.i5
     }
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
@@ -129,10 +143,17 @@ class WgInterface private constructor(builder: Builder) {
             jmax == obj.jmax &&
             s1 == obj.s1 &&
             s2 == obj.s2 &&
+            s3 == obj.s3 &&
+            s4 == obj.s4 &&
             h1 == obj.h1 &&
             h2 == obj.h2 &&
             h3 == obj.h3 &&
-            h4 == obj.h4
+            h4 == obj.h4 &&
+            i1 == obj.i1 &&
+            i2 == obj.i2 &&
+            i3 == obj.i3 &&
+            i4 == obj.i4 &&
+            i5 == obj.i5
     }
 
     /**
@@ -146,12 +167,12 @@ class WgInterface private constructor(builder: Builder) {
     }
 
     fun isAmnezia(): Boolean {
-        return jc.isPresent || jmin.isPresent || jmax.isPresent || s1.isPresent || s2.isPresent || h1.isPresent || h2.isPresent || h3.isPresent || h4.isPresent
+        return jc.isPresent || jmin.isPresent || jmax.isPresent || s1.isPresent || s2.isPresent || s3.isPresent || s4.isPresent || h1.isPresent || h2.isPresent || h3.isPresent || h4.isPresent || i1.isPresent || i2.isPresent || i3.isPresent || i4.isPresent || i5.isPresent
     }
 
     fun getAmzProps(): String {
         // make all the amz props into a single string
-        return "jc=${jc.orElse(0)}, jmin=${jmin.orElse(0)}, jmax=${jmax.orElse(0)}, s1=${s1.orElse(0)}, s2=${s2.orElse(0)}, h1=${h1.orElse(0)}, h2=${h2.orElse(0)}, h3=${h3.orElse(0)}, h4=${h4.orElse(0)}"
+        return "jc=${jc.orElse(0)}, jmin=${jmin.orElse(0)}, jmax=${jmax.orElse(0)}, s1=${s1.orElse(0)}, s2=${s2.orElse(0)}, s3=${s3.orElse(0)}, s4=${s4.orElse(0)}, h1=${h1.orElse(0)}, h2=${h2.orElse(0)}, h3=${h3.orElse(0)}, h4=${h4.orElse(0)}, i1=${i1.isPresent}, i2=${i2.isPresent}, i3=${i3.isPresent}, i4=${i4.isPresent}, i5=${i5.isPresent}"
     }
 
     /**
@@ -178,10 +199,17 @@ class WgInterface private constructor(builder: Builder) {
         hash = 31 * hash + jmax.hashCode()
         hash = 31 * hash + s1.hashCode()
         hash = 31 * hash + s2.hashCode()
+        hash = 31 * hash + s3.hashCode()
+        hash = 31 * hash + s4.hashCode()
         hash = 31 * hash + h1.hashCode()
         hash = 31 * hash + h2.hashCode()
         hash = 31 * hash + h3.hashCode()
         hash = 31 * hash + h4.hashCode()
+        hash = 31 * hash + i1.hashCode()
+        hash = 31 * hash + i2.hashCode()
+        hash = 31 * hash + i3.hashCode()
+        hash = 31 * hash + i4.hashCode()
+        hash = 31 * hash + i5.hashCode()
         return hash
     }
 
@@ -262,10 +290,17 @@ class WgInterface private constructor(builder: Builder) {
         jmax.ifPresent { j: Int? -> sb.append("JMax = ").append(j).append('\n') }
         s1.ifPresent { s: Int? -> sb.append("S1 = ").append(s).append('\n') }
         s2.ifPresent { s: Int? -> sb.append("S2 = ").append(s).append('\n') }
+        s3.ifPresent { s: Int? -> sb.append("S3 = ").append(s).append('\n') }
+        s4.ifPresent { s: Int? -> sb.append("S4 = ").append(s).append('\n') }
         h1.ifPresent { h: Long? -> sb.append("H1 = ").append(h).append('\n') }
         h2.ifPresent { h: Long? -> sb.append("H2 = ").append(h).append('\n') }
         h3.ifPresent { h: Long? -> sb.append("H3 = ").append(h).append('\n') }
         h4.ifPresent { h: Long? -> sb.append("H4 = ").append(h).append('\n') }
+        i1.ifPresent { v: String? -> sb.append("I1 = ").append(v).append('\n') }
+        i2.ifPresent { v: String? -> sb.append("I2 = ").append(v).append('\n') }
+        i3.ifPresent { v: String? -> sb.append("I3 = ").append(v).append('\n') }
+        i4.ifPresent { v: String? -> sb.append("I4 = ").append(v).append('\n') }
+        i5.ifPresent { v: String? -> sb.append("I5 = ").append(v).append('\n') }
         return sb.toString()
     }
 
@@ -302,10 +337,17 @@ class WgInterface private constructor(builder: Builder) {
      * jmax=0
      * s1=0
      * s2=0
+     * s3=0
+     * s4=0
      * h1=0
      * h2=0
      * h3=0
      * h4=0
+     * i1=<b 0x...>
+     * i2=<b 0x...>
+     * i3=<b 0x...>
+     * i4=<b 0x...>
+     * i5=<b 0x...>
      * replace_peers=true
      * public_key=9df151a45674657595a33f02e203f9b62ed5d6c9c54f5815f04708c53589b41e
      * allowed_ip=0.0.0.0/0
@@ -344,10 +386,17 @@ class WgInterface private constructor(builder: Builder) {
         jmax.ifPresent { j: Int? -> sb.append("jmax=").append(j).append('\n') }
         s1.ifPresent { s: Int? -> sb.append("s1=").append(s).append('\n') }
         s2.ifPresent { s: Int? -> sb.append("s2=").append(s).append('\n') }
+        s3.ifPresent { s: Int? -> sb.append("s3=").append(s).append('\n') }
+        s4.ifPresent { s: Int? -> sb.append("s4=").append(s).append('\n') }
         h1.ifPresent { h: Long? -> sb.append("h1=").append(h).append('\n') }
         h2.ifPresent { h: Long? -> sb.append("h2=").append(h).append('\n') }
         h3.ifPresent { h: Long? -> sb.append("h3=").append(h).append('\n') }
         h4.ifPresent { h: Long? -> sb.append("h4=").append(h).append('\n') }
+        i1.ifPresent { v: String? -> sb.append("i1=").append(v).append('\n') }
+        i2.ifPresent { v: String? -> sb.append("i2=").append(v).append('\n') }
+        i3.ifPresent { v: String? -> sb.append("i3=").append(v).append('\n') }
+        i4.ifPresent { v: String? -> sb.append("i4=").append(v).append('\n') }
+        i5.ifPresent { v: String? -> sb.append("i5=").append(v).append('\n') }
         return sb.toString()
     }
 
@@ -375,6 +424,14 @@ class WgInterface private constructor(builder: Builder) {
         return s2
     }
 
+    fun getS3(): Optional<Int> {
+        return s3
+    }
+
+    fun getS4(): Optional<Int> {
+        return s4
+    }
+
     fun getH1(): Optional<Long> {
         return h1
     }
@@ -389,6 +446,26 @@ class WgInterface private constructor(builder: Builder) {
 
     fun getH4(): Optional<Long> {
         return h4
+    }
+
+    fun getI1(): Optional<String> {
+        return i1
+    }
+
+    fun getI2(): Optional<String> {
+        return i2
+    }
+
+    fun getI3(): Optional<String> {
+        return i3
+    }
+
+    fun getI4(): Optional<String> {
+        return i4
+    }
+
+    fun getI5(): Optional<String> {
+        return i5
     }
 
     class Builder {
@@ -420,10 +497,17 @@ class WgInterface private constructor(builder: Builder) {
         var jmax = Optional.empty<Int>()
         var s1 = Optional.empty<Int>()
         var s2 = Optional.empty<Int>()
+        var s3 = Optional.empty<Int>()
+        var s4 = Optional.empty<Int>()
         var h1 = Optional.empty<Long>()
         var h2 = Optional.empty<Long>()
         var h3 = Optional.empty<Long>()
         var h4 = Optional.empty<Long>()
+        var i1 = Optional.empty<String>()
+        var i2 = Optional.empty<String>()
+        var i3 = Optional.empty<String>()
+        var i4 = Optional.empty<String>()
+        var i5 = Optional.empty<String>()
 
         // Defaults to not present.
         var mtu = Optional.empty<Int>()
@@ -489,6 +573,16 @@ class WgInterface private constructor(builder: Builder) {
             return this
         }
 
+        fun setS3(s3: Int): Builder {
+            this.s3 = Optional.of(s3)
+            return this
+        }
+
+        fun setS4(s4: Int): Builder {
+            this.s4 = Optional.of(s4)
+            return this
+        }
+
         fun setH1(h1: Long): Builder {
             this.h1 = Optional.of(h1)
             return this
@@ -506,6 +600,31 @@ class WgInterface private constructor(builder: Builder) {
 
         fun setH4(h4: Long): Builder {
             this.h4 = Optional.of(h4)
+            return this
+        }
+
+        fun setI1(i1: String): Builder {
+            this.i1 = Optional.of(i1)
+            return this
+        }
+
+        fun setI2(i2: String): Builder {
+            this.i2 = Optional.of(i2)
+            return this
+        }
+
+        fun setI3(i3: String): Builder {
+            this.i3 = Optional.of(i3)
+            return this
+        }
+
+        fun setI4(i4: String): Builder {
+            this.i4 = Optional.of(i4)
+            return this
+        }
+
+        fun setI5(i5: String): Builder {
+            this.i5 = Optional.of(i5)
             return this
         }
 
@@ -686,6 +805,42 @@ class WgInterface private constructor(builder: Builder) {
             }
         }
 
+        fun parseS3(s3: String): Builder {
+            return try {
+                setS3(s3.toInt())
+            } catch (e: NumberFormatException) {
+                throw BadConfigException(Section.INTERFACE, Location.AMNEZIA, s3, e)
+            }
+        }
+
+        fun parseS4(s4: String): Builder {
+            return try {
+                setS4(s4.toInt())
+            } catch (e: NumberFormatException) {
+                throw BadConfigException(Section.INTERFACE, Location.AMNEZIA, s4, e)
+            }
+        }
+
+        fun parseI1(i1: String): Builder {
+            return setI1(i1)
+        }
+
+        fun parseI2(i2: String): Builder {
+            return setI2(i2)
+        }
+
+        fun parseI3(i3: String): Builder {
+            return setI3(i3)
+        }
+
+        fun parseI4(i4: String): Builder {
+            return setI4(i4)
+        }
+
+        fun parseI5(i5: String): Builder {
+            return setI5(i5)
+        }
+
         fun parseH1(h1: String): Builder {
             return try {
                 setH1(h1.toLong())
@@ -791,10 +946,17 @@ class WgInterface private constructor(builder: Builder) {
                     "jmax" -> builder.parseJmax(attribute.value)
                     "s1" -> builder.parseS1(attribute.value)
                     "s2" -> builder.parseS2(attribute.value)
+                    "s3" -> builder.parseS3(attribute.value)
+                    "s4" -> builder.parseS4(attribute.value)
                     "h1" -> builder.parseH1(attribute.value)
                     "h2" -> builder.parseH2(attribute.value)
                     "h3" -> builder.parseH3(attribute.value)
                     "h4" -> builder.parseH4(attribute.value)
+                    "i1" -> builder.parseI1(attribute.value)
+                    "i2" -> builder.parseI2(attribute.value)
+                    "i3" -> builder.parseI3(attribute.value)
+                    "i4" -> builder.parseI4(attribute.value)
+                    "i5" -> builder.parseI5(attribute.value)
                     // no-op, some wg config has extra params which is ignored, instead of
                     // throwing unknown param error
                     else -> {}

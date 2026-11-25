@@ -40,6 +40,12 @@ object ProxyManager : KoinComponent {
     const val ID_TCP_BASE = "TCP"
     const val ID_S5_BASE = "S5"
     const val ID_HTTP_BASE = "HTTP"
+    // Aether engine (vendored Rust core, native/aether): the distinct
+    // firestack proxy id for the engine's local SOCKS5 listener
+    // (127.0.0.1:1819). See GoVpnAdapter.addAetherProxy() and
+    // firestack intra/ipn/aether.go. The primary traffic path uses the
+    // plain SOCKS5 slot (ID_S5_BASE); this id is for direct addressing.
+    const val ID_AETHER_BASE = "AETHER"
     const val ID_NONE = "SYSTEM" // no proxy
     val ID_RPN_WIN get() = Backend.RpnWin // rpn win proxy
 

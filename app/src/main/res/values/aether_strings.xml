@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Strings for the Aether tunnel engine UI (native/aether, AGPL-3.0).
+  Kept in its own file so the Aether feature adds no edits to strings.xml.
+-->
+<resources>
+    <string name="aether_title">Aether tunnel</string>
+    <string name="aether_subtitle">WARP over MASQUE — a Rust engine for censored networks (v2.4.0)</string>
+    <string name="aether_unsupported">Aether needs Android 8 (API 26) or newer on arm64 / armv7. This device cannot run the engine.</string>
+    <string name="aether_engine_unavailable">Aether engine failed to load. The native libraries were not built or are missing for this ABI.</string>
+    <string name="aether_engine_version">Engine version: %1$s</string>
+    <string name="aether_status">Status</string>
+    <string name="aether_status_idle">Idle</string>
+    <string name="aether_status_running">Tunnel running</string>
+    <string name="aether_status_error">Error: %1$s</string>
+    <string name="aether_endpoint">Endpoint: %1$s</string>
+    <string name="aether_transport">Transport: %1$s</string>
+    <string name="aether_mode_managed">Mode: managed (structured engine)</string>
+    <string name="aether_mode_cli">Mode: whole-engine (nested / Tor / Psiphon)</string>
+
+    <string name="aether_enable">Enable Aether tunnel</string>
+    <string name="aether_disable">Disable Aether tunnel</string>
+    <string name="aether_enabling">Starting engine, scanning for an endpoint…</string>
+    <string name="aether_disabling">Stopping engine…</string>
+    <string name="aether_enabled">Aether tunnel is up. Traffic goes through 127.0.0.1:1819.</string>
+    <string name="aether_disabled">Aether tunnel stopped. Your previous SOCKS5 proxy was restored.</string>
+    <string name="aether_start_vpn_hint">If the VPN is off, start it after enabling Aether — the tunnel proxy is picked up on VPN start.</string>
+
+    <string name="aether_section_transport">Transport</string>
+    <string name="aether_transport_hint">MASQUE (HTTP/3 or HTTP/2) looks like ordinary HTTPS. WireGuard is faster where inspection is light. Gool / Mim nest one tunnel inside another for a different exit address — they run the whole engine.</string>
+    <string name="aether_transport_masque">MASQUE (recommended)</string>
+    <string name="aether_transport_wg">WireGuard</string>
+    <string name="aether_transport_gool">WireGuard over MASQUE (gool)</string>
+    <string name="aether_transport_gool_classic">Nested WireGuard (gool-classic)</string>
+    <string name="aether_transport_mim">Nested MASQUE (mim)</string>
+    <string name="aether_peer">Manual endpoint (ip:port) — skips the scan</string>
+    <string name="aether_peer_hint">Leave empty to scan. Example: 162.159.196.1:443</string>
+    <string name="aether_outer_peer">Outer hop (ip:port)</string>
+    <string name="aether_inner_peer">Inner hop (ip:port)</string>
+    <string name="aether_gool_peer">WireGuard hop (ip:port, port 2408)</string>
+
+    <string name="aether_section_scan">Endpoint scan</string>
+    <string name="aether_scan_mode">Scan mode</string>
+    <string name="aether_scan_turbo">Turbo — first answer wins</string>
+    <string name="aether_scan_balanced">Balanced — fastest of a few (default)</string>
+    <string name="aether_scan_thorough">Thorough — sweep whole ranges</string>
+    <string name="aether_scan_verified">Verified — only edges proven to answer</string>
+    <string name="aether_scan_ironclad">Ironclad — real tunnel + real request per candidate</string>
+    <string name="aether_scan_ip">Scan IP version</string>
+    <string name="aether_scan_ip_v4">IPv4</string>
+    <string name="aether_scan_ip_v6">IPv6</string>
+    <string name="aether_scan_ip_dual">Dual-stack</string>
+    <string name="aether_scan_ports">Extra ports (comma-separated)</string>
+    <string name="aether_scan_excluded">Excluded endpoints (ip:port, comma-separated)</string>
+    <string name="aether_quick_reconnect">Quick reconnect — reuse the last good endpoint</string>
+    <string name="aether_btn_scan">Scan for endpoint</string>
+    <string name="aether_btn_verify">Verify endpoint</string>
+    <string name="aether_btn_clean_ip">Clean-IP scan</string>
+    <string name="aether_clean_ip_hint">Strictest scan (ironclad) plus a data-plane check: a gateway is only trusted once it actually carries traffic.</string>
+    <string name="aether_scan_running">Scanning… this can take a while on Thorough / Ironclad.</string>
+    <string name="aether_scan_found">Found endpoint: %1$s</string>
+    <string name="aether_scan_failed">Scan failed: %1$s</string>
+    <string name="aether_verify_ok">Endpoint %1$s carries traffic.</string>
+    <string name="aether_verify_fail">Endpoint %1$s did not pass the data check.</string>
+    <string name="aether_last_endpoint">Last endpoint: %1$s</string>
+
+    <string name="aether_section_noise">Noise &amp; DPI evasion</string>
+    <string name="aether_noize">Obfuscation profile</string>
+    <string name="aether_noize_off">Off — no inspection on this network</string>
+    <string name="aether_noize_light">Light — mild interference, lowest overhead</string>
+    <string name="aether_noize_firewall">Firewall — MASQUE default</string>
+    <string name="aether_noize_balanced">Balanced — good starting point</string>
+    <string name="aether_noize_aggressive">Aggressive — handshake is fingerprinted</string>
+    <string name="aether_fragment">Fragment the TLS ClientHello</string>
+    <string name="aether_fragment_hint">Splits the ClientHello on the HTTP/2 carrier and on WARP API calls. Helps where a firewall resets a ClientHello whose SNI ends in cloudflareclient.com.</string>
+    <string name="aether_fragment_size">Fragment size (bytes)</string>
+    <string name="aether_fragment_delay">Fragment delay (ms)</string>
+    <string name="aether_ech">Encrypted ClientHello (ECH)</string>
+    <string name="aether_ech_hint">Fetches an ECH config first so the server name is not sent in the clear. MASQUE only.</string>
+    <string name="aether_ech_domain">ECH domain (optional)</string>
+
+    <string name="aether_section_masque">MASQUE / QUIC</string>
+    <string name="aether_http2">Use HTTP/2 (TCP) instead of HTTP/3 (QUIC)</string>
+    <string name="aether_quic_v2">QUIC v2 opener</string>
+    <string name="aether_quic_v2_hint">Sends a QUIC v2 version-negotiation opener; opens a path on networks that block QUIC v1 but let QUIC v2 through.</string>
+    <string name="aether_masque_sni">MASQUE server name (SNI, optional)</string>
+    <string name="aether_masque_h2_peer">HTTP/2 peer override (ip:port, optional)</string>
+    <string name="aether_keepalive">WireGuard keepalive (seconds)</string>
+
+    <string name="aether_section_tor">Tor</string>
+    <string name="aether_tor_unavailable">Tor is not in this build — the engine was built without the tor feature. Rebuild with AETHER_FEATURES=tor to enable it.</string>
+    <string name="aether_tor_mode">Tor mode</string>
+    <string name="aether_tor_off">Off</string>
+    <string name="aether_tor_chain">Tor through the tunnel (exit is a Tor exit; second SOCKS on 1820)</string>
+    <string name="aether_tor_reverse">Tunnel through Tor (exit is a WARP exit)</string>
+    <string name="aether_tor_only">Tor alone (no WARP tunnel)</string>
+    <string name="aether_tor_bridges">Bridges</string>
+    <string name="aether_tor_bridges_auto">Auto — fetch from BridgeDB when Tor is blocked</string>
+    <string name="aether_tor_bridges_off">Off — no bridges</string>
+    <string name="aether_tor_bridges_custom">Custom — one bridge per line</string>
+    <string name="aether_tor_custom_bridges">Custom bridges</string>
+    <string name="aether_tor_country">Tor country code (optional, e.g. DE)</string>
+    <string name="aether_tor_hint">Tor modes run the whole engine. Tor through the tunnel keeps the usual proxy on 1819 and adds a Tor-exit proxy on 1820.</string>
+
+    <string name="aether_section_psiphon">Psiphon</string>
+    <string name="aether_psiphon_unavailable">Psiphon needs an external psiphon binary — none is bundled with this app, so Psiphon modes will fail with the engine’s install hint until a build bundles one. Settings below are saved for that build.</string>
+    <string name="aether_psiphon_mode">Psiphon mode</string>
+    <string name="aether_psiphon_off">Off</string>
+    <string name="aether_psiphon_chain">Psiphon through the tunnel</string>
+    <string name="aether_psiphon_reverse">Tunnel through Psiphon</string>
+    <string name="aether_psiphon_only">Psiphon alone (no WARP tunnel)</string>
+    <string name="aether_psiphon_region">Region (optional, e.g. US)</string>
+    <string name="aether_psiphon_cdn_sni">CDN server name (optional)</string>
+    <string name="aether_psiphon_bin">Psiphon binary path (optional)</string>
+    <string name="aether_psiphon_config">Psiphon config path (optional)</string>
+    <string name="aether_psiphon_entries">Server entries path (optional)</string>
+
+    <string name="aether_section_zerotrust">Zero Trust (Cloudflare Access)</string>
+    <string name="aether_zt_hint">Enrol this device with a Zero Trust team so the tunnel uses the organisation’s WARP account instead of the public one. Sign-in is by emailed code; the token stays inside the engine and is never shown or stored by the app.</string>
+    <string name="aether_zt_team">Team name or URL (e.g. my-org)</string>
+    <string name="aether_zt_email">Email for the one-time code</string>
+    <string name="aether_zt_request_code">Send sign-in code</string>
+    <string name="aether_zt_code">Code from the email</string>
+    <string name="aether_zt_submit_code">Sign in</string>
+    <string name="aether_zt_resend">Resend code</string>
+    <string name="aether_zt_signed_in">Signed in to the team. The token is kept by the engine.</string>
+    <string name="aether_zt_code_sent">Code sent to %1$s</string>
+    <string name="aether_zt_sign_out">Sign out (forget team token)</string>
+    <string name="aether_zt_gateway">Route HTTP through the organisation gateway</string>
+    <string name="aether_zt_need_team_email">Enter a team and an email first.</string>
+    <string name="aether_zt_failed">Team sign-in failed: %1$s</string>
+
+    <string name="aether_section_routing">Routing &amp; DNS</string>
+    <string name="aether_route_block">Block (domains / addresses / ports, comma-separated)</string>
+    <string name="aether_route_direct">Send direct (domains / addresses / ports, comma-separated)</string>
+    <string name="aether_route_hint">Rules are matched on the TLS server name, so they keep working behind the tunnel.</string>
+    <string name="aether_in_tunnel_dns">Resolvers inside the tunnel (comma-separated)</string>
+    <string name="aether_in_tunnel_dns_hint">Default: 1.1.1.1,1.0.0.1</string>
+    <string name="aether_upstream">Upstream proxy — dial out through another proxy/VPN (URL)</string>
+    <string name="aether_exit_loc">Preferred exit location (country code, e.g. DE)</string>
+    <string name="aether_http_proxy_port">Extra HTTP proxy port (optional, e.g. 1821)</string>
+
+    <string name="aether_section_killswitch">Kill-switch</string>
+    <string name="aether_killswitch">Fail closed — stop the VPN if the engine dies</string>
+    <string name="aether_killswitch_hint">Even with this off, a dead engine refuses SOCKS connections, so tunnel traffic cannot leak out direct — the proxy itself fails closed. With it on, the VPN is also stopped so the failure is visible instead of a VPN that carries nothing.</string>
+
+    <string name="aether_section_advanced">Advanced</string>
+    <string name="aether_extra_cli">Extra CLI arguments (one per line, whole-engine mode)</string>
+    <string name="aether_extra_cli_hint">Reaches every remaining core knob (TLS groups/ciphers, GREASE, ALPS, …). Example: --tls-groups X25519</string>
+    <string name="aether_extra_env">Extra AETHER_* settings (KEY=VALUE, one per line)</string>
+    <string name="aether_advanced_hint">Engine docs: Aether v2.4.0 (CluvexStudio), AGPL-3.0. Vendored source: native/aether. Full integration notes: docs/aether-integration.md.</string>
+
+    <string name="aether_saved">Aether settings saved.</string>
+    <string name="aether_open_proxy_settings">Open proxy settings</string>
+</resources>
