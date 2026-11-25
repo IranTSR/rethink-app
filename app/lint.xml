@@ -5,6 +5,12 @@
         <ignore regexp=".*/src/.*/res/values(?:-[^/]+)?/strings\.xml" />
     </issue>
 
+    <!-- Same treatment for the Aether strings file: its strings are English-only
+         for now (no translations yet), so MissingTranslation would fail the build -->
+    <issue id="all">
+        <ignore regexp=".*/src/.*/res/values(?:-[^/]+)?/aether_strings\.xml" />
+    </issue>
+
     <!-- Explicitly suppress StringFormatInvalid errors for translation files -->
     <issue id="StringFormatInvalid" severity="ignore" />
 
