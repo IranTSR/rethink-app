@@ -47,7 +47,11 @@ JNI_DIR="${PROJECT_DIR}/app/src/main/jniLibs"
 BRIDGE_SRC="${SCRIPT_DIR}/aether-jni.c"
 
 API="${ANDROID_API:-26}"
-ABIS=(${AETHER_ABIS:-"arm64-v8a armeabi-v7a"})
+# NB: do NOT write this as ABIS=(${AETHER_ABIS:-"arm64-v8a armeabi-v7a"}):
+# a quoted default inside ${var:-"..."} expands to ONE word, so the loop
+# below would see a single "ABI" called "arm64-v8a armeabi-v7a" and die.
+# read -ra splits the value (or the default) on whitespace, always.
+read -ra ABIS <<< "${AETHER_ABIS:-arm64-v8a armeabi-v7a}"
 FEATURES="${AETHER_FEATURES:-tor}"
 
 [ -n "${ANDROID_NDK_HOME:-}" ] && [ -d "${ANDROID_NDK_HOME}" ] \
