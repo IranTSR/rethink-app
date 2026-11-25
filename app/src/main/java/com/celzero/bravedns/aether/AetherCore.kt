@@ -66,7 +66,7 @@ object AetherCore {
                 Logger.i(LOG_TAG_VPN, "$TAG native libs loaded (hasTor=$hasTor)")
             } catch (e: UnsatisfiedLinkError) {
                 available = false
-                Logger.e(LOG_TAG_VPN, "$TAG native libs unavailable", e)
+                Logger.e(LOG_TAG_VPN, "$TAG native libs unavailable: ${e.message}")
             } catch (e: Exception) {
                 available = false
                 Logger.e(LOG_TAG_VPN, "$TAG native libs failed to load", e)

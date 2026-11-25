@@ -358,27 +358,6 @@ data class AetherConfig(
         return env
     }
 
-    companion object {
-        /** Every AETHER_* key this config can own (for unsetting stale ones). */
-        val OWNED_ENV_KEYS = listOf(
-            "AETHER_PROTOCOL", "AETHER_SCAN", "AETHER_NOIZE", "AETHER_IP",
-            "AETHER_QUICK_RECONNECT", "AETHER_MASQUE_HTTP2", "AETHER_QUIC_V2",
-            "AETHER_MASQUE_H2_FRAGMENT", "AETHER_MASQUE_H2_FRAGMENT_SIZE",
-            "AETHER_MASQUE_H2_FRAGMENT_DELAY", "AETHER_ECH", "AETHER_ECH_DOMAIN",
-            "AETHER_MASQUE_SNI", "AETHER_MASQUE_H2_PEER", "AETHER_PEER",
-            "AETHER_WG_PEER", "AETHER_GOOL_PEER", "AETHER_WIW_OUTER_PEER",
-            "AETHER_WIW_INNER_PEER", "AETHER_MIM_OUTER_PEER", "AETHER_MIM_INNER_PEER",
-            "AETHER_WG_KEEPALIVE", "AETHER_SOCKS", "AETHER_HTTP_PROXY",
-            "AETHER_DNS", "AETHER_ROUTE_BLOCK", "AETHER_ROUTE_DIRECT",
-            "AETHER_UPSTREAM", "AETHER_EXIT_LOC", "AETHER_TOR",
-            "AETHER_TOR_BRIDGES", "AETHER_TOR_COUNTRY", "AETHER_TOR_BIND",
-            "AETHER_PSIPHON", "AETHER_PSIPHON_REGION", "AETHER_PSIPHON_CDN_SNI",
-            "AETHER_PSIPHON_BIN", "AETHER_PSIPHON_CONFIG",
-            "AETHER_PSIPHON_SERVER_ENTRIES", "AETHER_TEAM", "AETHER_ACCESS_EMAIL",
-            "AETHER_GATEWAY",
-        )
-    }
-
     // -- CLI arguments (whole-engine path) ----------------------------------
 
     fun toCliArgs(): List<String> {
@@ -531,6 +510,25 @@ data class AetherConfig(
     companion object {
         private const val PREFS = "aether"
         private const val KEY_CONFIG = "config_v1"
+
+        /** Every AETHER_* key this config can own (for unsetting stale ones). */
+        val OWNED_ENV_KEYS = listOf(
+            "AETHER_PROTOCOL", "AETHER_SCAN", "AETHER_NOIZE", "AETHER_IP",
+            "AETHER_QUICK_RECONNECT", "AETHER_MASQUE_HTTP2", "AETHER_QUIC_V2",
+            "AETHER_MASQUE_H2_FRAGMENT", "AETHER_MASQUE_H2_FRAGMENT_SIZE",
+            "AETHER_MASQUE_H2_FRAGMENT_DELAY", "AETHER_ECH", "AETHER_ECH_DOMAIN",
+            "AETHER_MASQUE_SNI", "AETHER_MASQUE_H2_PEER", "AETHER_PEER",
+            "AETHER_WG_PEER", "AETHER_GOOL_PEER", "AETHER_WIW_OUTER_PEER",
+            "AETHER_WIW_INNER_PEER", "AETHER_MIM_OUTER_PEER", "AETHER_MIM_INNER_PEER",
+            "AETHER_WG_KEEPALIVE", "AETHER_SOCKS", "AETHER_HTTP_PROXY",
+            "AETHER_DNS", "AETHER_ROUTE_BLOCK", "AETHER_ROUTE_DIRECT",
+            "AETHER_UPSTREAM", "AETHER_EXIT_LOC", "AETHER_TOR",
+            "AETHER_TOR_BRIDGES", "AETHER_TOR_COUNTRY", "AETHER_TOR_BIND",
+            "AETHER_PSIPHON", "AETHER_PSIPHON_REGION", "AETHER_PSIPHON_CDN_SNI",
+            "AETHER_PSIPHON_BIN", "AETHER_PSIPHON_CONFIG",
+            "AETHER_PSIPHON_SERVER_ENTRIES", "AETHER_TEAM", "AETHER_ACCESS_EMAIL",
+            "AETHER_GATEWAY",
+        )
 
         fun load(context: Context): AetherConfig {
             val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)

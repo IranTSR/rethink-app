@@ -45,7 +45,7 @@ import dev.androidbroadcast.vbpd.viewBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.koin.core.component.inject
+import org.koin.android.ext.android.inject
 
 class AetherActivity : BaseActivity(R.layout.activity_aether) {
     private val b by viewBinding(ActivityAetherBinding::bind)
